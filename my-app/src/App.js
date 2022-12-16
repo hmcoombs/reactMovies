@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+const apiKey = "";
+
+const API_URL = `http://www.omdbapi.com/?apikey=${apiKey}&`
+// const API_URL = `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}&`
+
+const App = () =>{
+  
+const getMoviesByName = async (title) => {
+  const response = await fetch(`${API_URL}&s=${title}`);
+  const movie = await response.json();
+
+  console.log(movie);
 }
 
-export default App;
+
+useEffect(() => {
+  getMoviesByName('batman');
+}, [] );
+}
+
+export default App
+
+// const getMoviesByName = async (title) => {
+//   const result = await fetch(`http://www.omdbapi.com/?t=${title}&apikey=${apiKey}&`);
+//   const movie = await result.json();
+//   console.log (movie);
+// };
+
+// getMoviesByName('batman');
